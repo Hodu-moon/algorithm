@@ -1,0 +1,12 @@
+-- 코드를 입력하세요
+SELECT USER_ID,	NICKNAME,concat(CITY,' ', STREET_ADDRESS1, ' ' , STREET_ADDRESS2) as '전체주소'  
+, CONCAT(SUBSTRING(TLNO, 1, 3), '-', SUBSTRING(TLNO, 4, 4), '-', SUBSTRING(TLNO, 8, 4)) as '전화번호'
+FROM USED_GOODS_USER
+WHERE USER_ID IN (SELECT writer_id
+    FROM USED_GOODS_BOARD
+    GROUP BY writer_id
+    having count(*) >= 3 
+)
+ORDER BY USER_ID DESC
+
+;
